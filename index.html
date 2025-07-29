@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comprehensive Financial Tracker</title>
+    <!-- Link to the Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <!-- Theme color for the browser's address bar on mobile -->
+    <meta name="theme-color" content="#6B46C1"> 
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Babel Standalone for in-browser JSX transpilation -->
@@ -16,6 +21,40 @@
     <!-- Load Firebase UMD builds (makes firebase globally available) -->
     <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        /* Custom styles for the app */
+        body {
+            font-family: 'Inter', sans-serif; /* Using Inter font as per instructions */
+        }
+        /* Ensure all elements have rounded corners */
+        .rounded-lg, .rounded-xl, .rounded-full {
+            border-radius: 0.5rem; /* Tailwind default for rounded-lg */
+        }
+        /* Specific adjustments for input/select focus states */
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #8B5CF6; /* Purple-500 equivalent */
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.5); /* Purple-500 with opacity */
+        }
+        /* Responsive adjustments for tables on smaller screens */
+        @media (max-width: 768px) {
+            .overflow-x-auto {
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            }
+            .min-w-full {
+                width: 100%; /* Ensure table takes full width */
+            }
+            table th, table td {
+                padding: 0.75rem 0.5rem; /* Adjust padding for smaller screens */
+                font-size: 0.875rem; /* Smaller font size */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trigger redeploy --> <!-- This comment helps ensure GitHub Pages redeploys -->
+    <div id="root"></div> <!-- This is the main div where your React app will be rendered -->
 
     <script type="text/babel" data-presets="react">
         // Firebase modules are now globally available via the UMD scripts above.
@@ -129,28 +168,24 @@
                                             ))}
                                             {(onDelete || onEdit) && (
                                                 <td className="py-3 px-4 text-center whitespace-nowrap">
-                                                    {onEdit && (
-                                                        <button
-                                                            onClick={() => onEdit(item)}
-                                                            className="text-blue-500 hover:text-blue-700 transition duration-200 mr-2"
-                                                            aria-label={`Edit record ${item.id}`}
-                                                        >
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                            </svg>
-                                                        </button>
-                                                    )}
-                                                    {onDelete && (
-                                                        <button
-                                                            onClick={() => onDelete(item.id, item.collectionName)}
-                                                            className="text-red-500 hover:text-red-700 transition duration-200"
-                                                            aria-label={`Delete record ${item.id}`}
-                                                        >
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                            </svg>
-                                                        </button>
-                                                    )}
+                                                    <button
+                                                        onClick={() => onEdit(item)}
+                                                        className="text-blue-500 hover:text-blue-700 transition duration-200 mr-2"
+                                                        aria-label={`Edit record ${item.id}`}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                        </svg>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => onDelete(item.id, item.collectionName)}
+                                                        className="text-red-500 hover:text-red-700 transition duration-200"
+                                                        aria-label={`Delete record ${item.id}`}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </button>
                                                 </td>
                                             )}
                                         </tr>
@@ -166,7 +201,7 @@
 
         // --- Personal Transactions Module ---
         function PersonalTransactionsModule({ transactions, loading, onDeleteTransaction, onSaveTransaction, onBack, showAmounts, editingRecord, setEditingRecord }) {
-            const [description, setDescription] = React.useState('');
+            const [description, setDescription] = React.useState(''); // Corrected syntax here
             const [amount, setAmount] = React.useState(''); // Keep as string for input field
             const [type, setType] = React.useState('expense');
             const [date, setDate] = React.useState(new Date().toISOString().split('T')[0]);
@@ -326,7 +361,7 @@
                         {editingRecord && (
                             <button
                                 type="button"
-                                onClick={() => setEditingRecord(null)} // This will clear editingRecord and trigger useEffect to reset form
+                                onClick={() => { console.log("[PersonalTransactionsModule] Cancel Edit clicked."); setEditingRecord(null); }} // Clear editingRecord and trigger useEffect to reset form
                                 className="w-full bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg mt-2 transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
                             >
                                 Cancel Edit
@@ -619,7 +654,7 @@
                         {editingRecord && (
                             <button
                                 type="button"
-                                onClick={() => setEditingRecord(null)}
+                                onClick={() => { console.log("[RentCollectionModule] Cancel Edit clicked."); setEditingRecord(null); }}
                                 className="w-full bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg mt-2 transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
                             >
                                 Cancel Edit
@@ -800,7 +835,7 @@
                         {editingRecord && (
                             <button
                                 type="button"
-                                onClick={() => setEditingRecord(null)}
+                                onClick={() => { console.log("[MoneyLendingModule] Cancel Edit clicked."); setEditingRecord(null); }}
                                 className="w-full bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg mt-2 transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
                             >
                                 Cancel Edit
@@ -1461,6 +1496,20 @@
             );
         }
 
+        // Register the Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered! Scope:', registration.scope);
+                    })
+                    .catch(err => {
+                        console.error('Service Worker registration failed:', err);
+                    });
+            });
+        }
+
+
         // Render the React App component into the root div
         const container = document.getElementById('root');
         console.log("Root container found:", container);
@@ -1472,8 +1521,5 @@
             console.error("Error: Root container with ID 'root' not found in the HTML.");
         }
     </script>
-</head>
-<body class="m-0 p-0">
-    <div id="root"></div>
 </body>
 </html>
