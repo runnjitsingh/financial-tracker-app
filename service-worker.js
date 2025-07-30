@@ -2,11 +2,11 @@
 const CACHE_NAME = 'financial-tracker-cache-v2'; // Incrementing cache version
 
 // List the files you want to cache (your app's core assets)
-// Make sure these paths are correct relative to the root of your server
+// Make sure these paths are correct relative to the root of your GitHub Pages project
 const urlsToCache = [
-  '/', // Caches the root path, which will typically serve your index.html
-  '/index.html', // Changed from dailytansactions.html
-  '/manifest.json',
+  '/financial-tracker-app/', // Caches the root path of your project sub-directory
+  '/financial-tracker-app/index.html',
+  '/financial-tracker-app/manifest.json',
   'https://cdn.tailwindcss.com', // Tailwind CSS CDN
   'https://unpkg.com/@babel/standalone/babel.min.js', // Babel CDN
   'https://unpkg.com/react@18/umd/react.production.min.js', // React CDN
