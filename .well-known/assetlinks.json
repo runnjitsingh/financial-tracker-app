@@ -2,9 +2,9 @@
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "io.github.runnjitsingh.twa", // 
+    "package_name": "io.github.runnjitsingh.twa", 
     "sha256_cert_fingerprints": [
-      "06:27:55:AD:1E:76:9F:D9:7E:FE:7E:F1:15:76:90:AA:8E:34:B7:DC:89:62:FD:37:C9:86:1A:DB:81:AB:7C:A1" // 
+      "06:27:55:AD:1E:76:9F:D9:7E:FE:7E:F1:15:76:90:AA:8E:34:B7:DC:89:62:FD:37:C9:86:1A:DB:81:AB:7C:A1" 
     ]
   }
 }]
