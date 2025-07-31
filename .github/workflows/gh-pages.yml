@@ -20,14 +20,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: financial-tracker-app
+        working-directory: financial-tracker-app/financial-tracker-app
 
       - name: Build the project
         run: CI=false npm run build
-        working-directory: financial-tracker-app
+        working-directory:  financial-tracker-app/financial-tracker-app
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: financial-tracker-app/build
+          publish_dir: financial-tracker-app/financial-tracker-app/build 
