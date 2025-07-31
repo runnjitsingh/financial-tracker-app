@@ -18,7 +18,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './/financial-tracker-app' # This uploads the entire repository content
+          path: './' # This uploads the entire repository content
 
       - name: Deploy to GitHub Pages
         id: deployment
